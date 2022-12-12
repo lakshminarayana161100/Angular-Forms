@@ -1,0 +1,37 @@
+<h1>Form validation</h1>
+<form [formGroup]="loginForm" (ngSubmit)="registerSubmited()">
+
+  <label for="uname">Username :</label>
+  <input type="text" id="uname" name="uname" formControlName="uname" minlength="8" class="from-control w-50 m-3">
+
+  <div *ngIf="loginForm.get('uname')?.touched&&loginForm.get('uname')?.hasError('required')">username is required </div>
+  <div *ngIf="loginForm.controls['uname'].touched&&loginForm.controls['uname']?.hasError('minlength')">username contain
+    8 character</div>
+
+  <br>
+
+  <label for="email">email :</label>
+  <input type="email" id="email" name="email" formControlName="email" class="from-control w-50 m-3"
+    pattern=[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}>
+
+  <div *ngIf="loginForm.get('email')?.touched&&loginForm.get('email')?.hasError('required')">email is required </div>
+  <div *ngIf="loginForm.controls['email'].touched&&loginForm.controls['email']?.hasError('pattern')">enter the
+    validemail</div>
+
+  <br>
+  <label for="password">password :</label>
+  <input type="password" id="password" name="password" formControlName="password" class="from-control w-50 m-3"
+    pattern="(/^(?=\D*\d)(?=[^a-z]*[a-z])">
+
+  <div *ngIf="loginForm.get('password')?.touched&&loginForm.get('password')?.hasError('required')">password is required
+  </div>
+  <div *ngIf="loginForm.controls['password'].touched&&loginForm.controls['password']?.hasError('pattern')">password
+    contain 8 character</div>
+
+  <div>
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+  </div>
+
+</form>
+<hr>
+<app-customvalidations></app-customvalidations>
